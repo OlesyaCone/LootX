@@ -1,0 +1,84 @@
+$primary-color: #2989d8;
+$primary-hover-color: #207cca;
+$primary-border-color: #1e5799;
+$background-color: #2b3035;
+$white: white;
+$shadow-color: rgba(0, 0, 0, 0.1);
+$hover-background: #f0f0f0;
+
+$border-radius: 20px;
+$button-border-radius: 4px;
+$padding: 20px;
+$button-padding: 10px 20px;
+$font-size: 16px;
+$title-font-size: 24px;
+$close-button-size: 30px;
+$close-button-font-size: 24px;
+$close-button-offset: -15px;
+
+$z-index-modal: 1000;
+$z-index-close-button: 1001;
+$z-index-auth-button: 999;
+
+
+.form-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: $background-color;
+  border-radius: $border-radius;
+  padding: $padding;
+  width: 100%;
+  max-width: 350px;
+  box-shadow: 0 2px 10px $shadow-color;
+  z-index: $z-index-modal;
+}
+
+.closeModalBtn {
+  position: absolute;
+  top: $close-button-offset;
+  right: $close-button-offset;
+  font-size: $close-button-font-size;
+  font-weight: bold;
+  color: $primary-color;
+  cursor: pointer;
+  background-color: $white;
+  border-radius: 50%;
+  width: $close-button-size;
+  height: $close-button-size;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px $shadow-color;
+  z-index: $z-index-close-button;
+
+  &:hover {
+    color: darken($primary-color, 10%);
+    background-color: $hover-background;
+  }
+}
+
+.auth-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: $primary-color;
+  color: $white;
+  border: 1px solid $primary-color;
+  padding: $button-padding;
+  border-radius: $button-border-radius;
+  font-size: $font-size;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  z-index: $z-index-auth-button;
+
+  &:hover {
+    background-color: $primary-hover-color;
+    border-color: $primary-border-color;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
