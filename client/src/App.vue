@@ -3,7 +3,7 @@ import Header from "./components/Header.vue";
 import Authorization from "./components/Authorization.vue";
 import axios from "axios";
 
-axios.defaults.baseURL = "http://192.168.0.82:8000";
+axios.defaults.baseURL = "http://26.43.217.164:8000";
 </script>
 
 <template>

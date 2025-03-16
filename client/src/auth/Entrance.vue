@@ -1,19 +1,14 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import "./authorization.scss";
-import axios from "axios";
-
-interface User {
-  email: string;
-  password: string;
-}
+import type { User } from "../types/interface";
 
 export default defineComponent({
   emits: ["toggle-form"],
   data() {
     return {
       user: {
-        email: "",
+        username: "",
         password: "",
       } as User,
       isEmailError: false,
@@ -25,74 +20,45 @@ export default defineComponent({
       this.isEmailError = false;
       this.isPasswordError = false;
 
-      if (!this.user.email.includes("@") || !this.user.email.includes(".")) {
+      if (
+        !this.user.username.includes("@") ||
+        !this.user.username.includes(".")
+      ) {
         this.isEmailError = true;
       }
       if (this.user.password.length < 5) {
         this.isPasswordError = true;
       }
       if (!this.isEmailError && !this.isPasswordError) {
-        this.login();
       }
     },
-
-    login(): void {
-      const userData: User = {
-        email: this.user.email,
-        password: this.user.password,
-      };
-      this.entrance(userData);
-    },
-
     resetForm(): void {
-      this.user.email = "";
+      this.user.username = "";
       this.user.password = "";
       this.isEmailError = false;
       this.isPasswordError = false;
-    },
-
-    async entrance(userData: User): Promise<void> {
-      try {
-        const response = await axios.post("/auth", userData); 
-        this.user = response.data; 
-        console.log("Успешный вход:", this.user);
-      } catch (error) {
-        console.error("Ошибка при входе:", error);
-        this.isEmailError = true; 
-        this.isPasswordError = true;
-      }
     },
   },
 });
 </script>
 
 <template>
-  <form class="form" @submit.prevent="validateForm">
-    <p class="title">Вход</p>
-    <label>
-      <input
-        class="input"
-        type="email"
-        placeholder="email"
-        v-model="user.email"
-      />
-      <span>Email</span>
+  <form class="login-box" @submit.prevent="validateForm">
+    <h1 class="title">Вход</h1>
+    <div class="user-box">
+      <input class="input" type="text" v-model="user.username" required />
+      <label>Имя</label>
       <p class="limitation" :class="{ visible: isEmailError }">
-        Пользователь с таким email не существует!
+        Пользователь с таким именем не существует!
       </p>
-    </label>
-    <label>
-      <input
-        class="input"
-        type="password"
-        placeholder="пароль"
-        v-model="user.password"
-      />
-      <span>Пароль</span>
+    </div>
+    <div class="user-box">
+      <input class="input" type="password" v-model="user.password" required />
+      <label>Пароль</label>
       <p class="limitation" :class="{ visible: isPasswordError }">
         Неверный пароль!
       </p>
-    </label>
+    </div>
     <button class="submit" type="submit">Войти</button>
     <p class="signin">
       Нет аккаунта?
