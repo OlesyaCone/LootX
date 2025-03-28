@@ -9,7 +9,7 @@ axios.defaults.baseURL = "http://26.43.217.164:8000";
 <template>
   <Header></Header>
   <Authorization></Authorization>
-  <!-- <router-view></router-view> -->
+  <router-view></router-view>
 </template>
 
 <style>
@@ -18,6 +18,7 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 * {

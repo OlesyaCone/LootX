@@ -132,6 +132,23 @@ $animation-duration: 1.5s;
       }
     }
   }
+
+  .close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    color: $form-text-color;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  
+    &:hover {
+      color: $error-color;
+    }
+  }
+  
 }
 
 @keyframes btn-anim1 {

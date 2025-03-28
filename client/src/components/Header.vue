@@ -4,7 +4,7 @@ import "./scss/header.scss";
 
 <template>
   <header>
-    <img src="../assets/logo_dark.png" />
+    <img src="../assets/logo_dark.svg" />
     <div class="search">
       <select>
         <option value="ru">Русский</option>

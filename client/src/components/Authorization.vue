@@ -1,15 +1,13 @@
 <script lang="ts">
-import { defineComponent, ref, onBeforeUnmount } from "vue";
-import Register from "../auth/Register.vue";
-import Entrance from "../auth/Entrance.vue";
-import VerifyToken from "../auth/Verify.vue";
+import { defineComponent, ref, onMounted, onBeforeUnmount } from "vue";
+import { defineAsyncComponent } from "vue";
 import "./scss/button.scss";
 
 export default defineComponent({
   components: {
-    Register,
-    Entrance,
-    VerifyToken,
+    Register: defineAsyncComponent(() => import("../auth/Register.vue")),
+    Entrance: defineAsyncComponent(() => import("../auth/Entrance.vue")),
+    VerifyToken: defineAsyncComponent(() => import("../auth/Verify.vue")),
   },
   setup() {
     const isLoginForm = ref(false);
@@ -19,19 +17,6 @@ export default defineComponent({
     const formContainer = ref<HTMLElement | null>(null);
     const authButton = ref<HTMLElement | null>(null);
 
-
-    const openModal = () => {
-      isModalOpen.value = true;
-      setTimeout(() => {
-        document.addEventListener("click", handleClickOutside);
-      }, 100);
-    };
-
-    const closeModal = () => {
-      isModalOpen.value = false;
-      document.removeEventListener("click", handleClickOutside);
-    };
-
     const handleClickOutside = (event: MouseEvent) => {
       if (
         formContainer.value &&
@@ -39,9 +24,16 @@ export default defineComponent({
         authButton.value &&
         !authButton.value.contains(event.target as Node)
       ) {
-        console.log("Клик вне формы и не по кнопке");
         closeModal();
       }
+    };
+
+    const openModal = () => {
+      isModalOpen.value = true;
+    };
+
+    const closeModal = () => {
+      isModalOpen.value = false;
     };
 
     const toggleForm = () => {
@@ -62,6 +54,10 @@ export default defineComponent({
     const onRegisterSuccess = () => {
       showVerifyToken.value = true;
     };
+
+    onMounted(() => {
+      document.addEventListener("click", handleClickOutside);
+    });
 
     onBeforeUnmount(() => {
       document.removeEventListener("click", handleClickOutside);

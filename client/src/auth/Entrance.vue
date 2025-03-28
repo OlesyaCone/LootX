@@ -2,6 +2,7 @@
 import { defineComponent } from "vue";
 import "./authorization.scss";
 import type { User } from "../types/interface";
+import { entranceUser } from "../requests/auth";
 
 export default defineComponent({
   emits: ["toggle-form"],
@@ -16,28 +17,36 @@ export default defineComponent({
     };
   },
   methods: {
-    validateForm(): void {
+    async validateForm(): Promise<void> {
       this.isEmailError = false;
       this.isPasswordError = false;
 
-      if (
-        !this.user.username.includes("@") ||
-        !this.user.username.includes(".")
-      ) {
-        this.isEmailError = true;
-      }
-      if (this.user.password.length < 5) {
-        this.isPasswordError = true;
-      }
       if (!this.isEmailError && !this.isPasswordError) {
+        try {
+          await entranceUser(this.user);
+        } catch (error) {
+          this.user.username = "";
+          this.user.password = "";
+          this.isEmailError = false;
+          this.isPasswordError = false;
+        }
       }
     },
-    resetForm(): void {
-      this.user.username = "";
-      this.user.password = "";
-      this.isEmailError = false;
-      this.isPasswordError = false;
+    handleClickOutside(event: MouseEvent): void {
+      const form = this.$el as HTMLElement;
+      if (!form.contains(event.target as Node)) {
+        this.user.username = "";
+        this.user.password = "";
+        this.isEmailError = false;
+        this.isPasswordError = false;
+      }
     },
+  },
+  mounted() {
+    document.addEventListener("click", this.handleClickOutside);
+  },
+  beforeUnmount() {
+    document.removeEventListener("click", this.handleClickOutside);
   },
 });
 </script>
@@ -48,16 +57,10 @@ export default defineComponent({
     <div class="user-box">
       <input class="input" type="text" v-model="user.username" required />
       <label>Имя</label>
-      <p class="limitation" :class="{ visible: isEmailError }">
-        Пользователь с таким именем не существует!
-      </p>
     </div>
     <div class="user-box">
       <input class="input" type="password" v-model="user.password" required />
       <label>Пароль</label>
-      <p class="limitation" :class="{ visible: isPasswordError }">
-        Неверный пароль!
-      </p>
     </div>
     <button class="submit" type="submit">Войти</button>
     <p class="signin">

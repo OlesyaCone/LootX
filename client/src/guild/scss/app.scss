@@ -1,0 +1,146 @@
+$primary-bg: #080d22;
+$secondary-bg: #1c1c2f;
+$border-color: #686868;
+$text-color: #ffffff;
+$hover-blue: #0026ff85;
+$hover-blue-light: #3351ff85;
+
+$purple-accent: #a335ee;
+$green-accent: #1eff00;
+$yellow-accent: #ffd100;
+$gray-text: #9d9d9d;
+
+$base-font-size: 13px;
+$title-font-size: 16px;
+$border-radius: 12px;
+$small-border-radius: 8px;
+$image-size: 64px;
+$padding-small: 2px;
+$padding-medium: 15px;
+$padding-large: 20px;
+$group-margin: 40px;
+
+$box-shadow: 0 6px 12px #00000080;
+$hover-transform: translateY(-5px);
+
+.app {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+
+  .right-side {
+    border-radius: $border-radius;
+    padding: $padding-large;
+    font-size: $base-font-size + 2;
+    width: 100%;
+
+    .todoist {
+      background-color: $secondary-bg;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: $text-color;
+    }
+
+    .tile {
+      border-radius: $padding-small;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      padding: $padding-medium;
+      text-align: center;
+
+      &:hover {
+        transform: $hover-transform;
+        box-shadow: $box-shadow;
+      }
+    }
+
+    .btn {
+      background-color: #3a3e52;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: $small-border-radius;
+      color: $text-color;
+      padding: $padding-small $padding-small * 8;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: darken(#3a3e52, 10%);
+      }
+    }
+  }
+
+  .left-side {
+    display: flex;
+    padding: $padding-large;
+
+    img {
+      border: 3px ridge $border-color;
+      width: $image-size;
+      height: $image-size;
+      border-radius: $border-radius;
+      object-fit: cover;
+      position: relative;
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+      background-clip: padding-box;
+      padding: $padding-small;
+
+      &:hover {
+        background: $hover-blue;
+        box-shadow: 0 0 0 $image-size * 0.85 $hover-blue-light inset;
+        cursor: pointer;
+      }
+    }
+
+    .card {
+      background-color: $primary-bg;
+      border: 3px ridge $border-color;
+      border-radius: $border-radius;
+      color: $text-color;
+      width: 320px;
+      height: auto;
+      padding: $padding-small;
+      line-height: 0.1;
+      font-size: $base-font-size;
+
+      .group + .group {
+        margin-top: $group-margin;
+      }
+
+      .title {
+        color: $purple-accent;
+        font-size: $title-font-size;
+      }
+
+      .green {
+        color: $green-accent;
+      }
+
+      .level {
+        color: $yellow-accent;
+      }
+
+      .line {
+        display: block;
+        height: 0;
+        margin-top: $padding-medium;
+
+        a {
+          color: $gray-text;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+
+      .socet {
+        color: $gray-text;
+        text-decoration: none;
+      }
+
+      .socket-bonus {
+        color: $gray-text;
+      }
+    }
+  }
+}

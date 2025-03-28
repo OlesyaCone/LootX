@@ -54,7 +54,7 @@ export default defineComponent({
         !this.isPasswordError &&
         !this.isConfirmPasswordError
       ) {
-        this.register();
+        this.register(); 
       }
     },
     async register(): Promise<void> {
@@ -66,7 +66,7 @@ export default defineComponent({
 
       try {
         await registerUser(userData);
-        this.showVerifyToken = true;
+        this.showVerifyToken = true; 
         this.resetForm();
         this.$emit("register-success");
       } catch (error) {
@@ -87,22 +87,42 @@ export default defineComponent({
   <div>
     <form v-if="!showVerifyToken" class="login-box" @submit.prevent="validateForm">
       <h1 class="title">Регистрация</h1>
+
       <div class="user-box">
         <input class="input" type="text" v-model="name" required />
         <label>Имя</label>
+        <span v-if="isUsernameError" class="limitation" :class="{ visible: isUsernameError }">
+          Имя должно быть от 2 до 12 символов
+        </span>
       </div>
+
       <div class="user-box">
         <input class="input" type="text" v-model="email" required />
         <label>Email</label>
+        <span v-if="isEmailError" class="limitation" :class="{ visible: isEmailError }">
+          Введите корректный email
+        </span>
       </div>
+
       <div class="user-box">
         <input class="input" type="password" v-model="password" required />
         <label>Пароль</label>
+        <span v-if="isPasswordError" class="limitation" :class="{ visible: isPasswordError }">
+          Пароль должен быть не менее 5 символов
+        </span>
       </div>
+
       <div class="user-box">
         <input class="input" type="password" v-model="confirmPassword" required />
         <label>Повторите пароль</label>
+        <span v-if="isConfirmPasswordError" class="limitation" :class="{ visible: isConfirmPasswordError }">
+          Пароли не совпадают
+        </span>
+        <span v-if="notConfirmPassword" class="limitation" :class="{ visible: notConfirmPassword }">
+          Подтвердите пароль
+        </span>
       </div>
+
       <button class="submit" type="submit">Зарегистрироваться</button>
       <p class="signin">
         Есть аккаунт?

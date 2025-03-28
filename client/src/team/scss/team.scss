@@ -1,0 +1,244 @@
+$background-color: #24282c;
+$background-light: #2c3139;
+$background-hover: #343b45;
+$background-icon: #3a404c;
+$primary-color: #1e88e5;
+$primary-hover: #1976d2;
+$secondary-color: #4a5568;
+$secondary-hover: #3a4454;
+$text-color: #e6e6e6;
+$text-muted: #9aa0a9;
+$white: #ffffff;
+$orange: #ff5722;
+$gradient: linear-gradient(
+  135deg,
+  #1e5799 0%,
+  #2989d8 50%,
+  #207cca 51%,
+  #7db9e8 100%
+);
+$shadow: 0 8px 24px #00000033;
+$shadow-hover: 0 12px 30px #0000004d;
+$modal-background: #000000b3;
+$hr-color: #4a4f54;
+
+$padding-small: 8px 15px;
+$padding-medium: 12px 20px;
+$padding-large: 20px 25px;
+$padding-section: 25px;
+$margin-bottom: 15px;
+$margin-section: 10px;
+
+$border-radius-small: 6px;
+$border-radius-medium: 8px;
+$border-radius-large: 12px;
+
+$icon-size: 48px;
+$font-size-small: 0.8rem;
+$font-size-medium: 1rem;
+$font-size-large: 1.5rem;
+$font-size-xlarge: 1.8rem;
+
+$transition-fast: 0.2s ease;
+$transition-medium: 0.3s ease;
+
+.team-card {
+  background-color: $background-color;
+  border-radius: $border-radius-large;
+  box-shadow: $shadow;
+  margin-bottom: 30px;
+  transition: transform $transition-medium, box-shadow $transition-medium;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 800px;
+  width: 100%; 
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  &:hover {
+    transform: translateY(-50%, calc(-50% - 2px));
+    box-shadow: $shadow-hover;
+  }
+
+  .team-header {
+    background: $gradient;
+    padding: $padding-large;
+    border-bottom: 1px solid $background-light;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .team-title {
+      color: $white;
+      font-size: $font-size-xlarge;
+      margin: 0;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .edit-btn {
+      background-color: rgba($white, 0.2);
+      border: none;
+      color: $white;
+      padding: $padding-small;
+      border-radius: $border-radius-small;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      &:hover {
+        background-color: rgba($white, 0.3);
+      }
+    }
+
+    .delete-btn {
+      background-color: rgba($white, 0.2);
+      border: none;
+      color: $white;
+      padding: $padding-small;
+      border-radius: $border-radius-small;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background-color $transition-fast, color $transition-fast;
+    
+      &:hover {
+        background-color: rgba($orange, 0.3);
+        color: darken($orange, 10%);
+      }
+    
+      &:active {
+        background-color: rgba($orange, 0.4);
+      }
+    }
+    
+    .header-actions {
+      display: flex;
+      gap: 10px;
+    }
+  }
+
+  .team-content {
+    padding: $padding-section;
+
+    .info-row {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: $padding-section;
+      justify-content: space-between;
+
+      .info-item {
+        display: flex;
+        align-items: center;
+        width: 48%;
+        margin-bottom: $margin-bottom;
+        background-color: $background-light;
+        border-radius: $border-radius-medium;
+        padding: $padding-section;
+        transition: background-color $transition-fast;
+
+        &:hover {
+          background-color: $background-hover;
+        }
+
+        .info-icon {
+          background-color: $background-icon;
+          width: $icon-size;
+          height: $icon-size;
+          border-radius: $border-radius-large;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-right: 15px;
+          font-size: $font-size-large;
+          color: $primary-color;
+        }
+
+        .info-details {
+          flex-grow: 1;
+
+          .info-label {
+            display: block;
+            font-size: $font-size-small;
+            color: $text-muted;
+            margin-bottom: 5px;
+          }
+
+          .info-value {
+            font-size: $font-size-medium;
+            font-weight: 500;
+            color: $text-color;
+            word-break: break-all;
+          }
+        }
+      }
+    }
+
+    .owner-section {
+      border-top: 1px solid $background-icon;
+      padding-top: $padding-section;
+      margin-top: $margin-section;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      margin-bottom: $margin-bottom;
+      background-color: $background-light;
+      border-radius: $border-radius-medium;
+      padding: $padding-section;
+      transition: background-color $transition-fast;
+
+      &:hover {
+        background-color: $background-hover;
+      }
+
+      .info-item {
+        display: flex;
+        align-items: center;
+        width: 100%;
+
+        .info-icon {
+          background-color: $background-icon;
+          width: $icon-size;
+          height: $icon-size;
+          border-radius: $border-radius-large;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-right: 15px;
+          font-size: $font-size-large;
+          color: $orange; 
+        }
+
+        .info-details {
+          flex-grow: 1;
+
+          .info-label {
+            display: block;
+            font-size: $font-size-small;
+            color: $text-muted;
+            margin-bottom: 5px;
+          }
+
+          .info-value {
+            font-size: $font-size-medium;
+            font-weight: 500;
+            color: $text-color;
+            word-break: break-all;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+hr {
+  border: none;
+  height: 2px;
+  background-color: $hr-color;
+  margin: 20px 0;
+  border-radius: $border-radius-small;
+}
